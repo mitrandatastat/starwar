@@ -1,0 +1,1460 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Star War Survey}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Read the Datafile}\label{read-the-datafile}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{star\PYZus{}wars} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./databank/StarWars.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}   RespondentID Have you seen any of the 6 films in the Star Wars franchise?  \textbackslash{}
+        0          NaN                                           Response             
+        1   3292879998                                                Yes             
+        2   3292879538                                                 No             
+        3   3292765271                                                Yes             
+        4   3292763116                                                Yes             
+        5   3292731220                                                Yes             
+        6   3292719380                                                Yes             
+        7   3292684787                                                Yes             
+        8   3292663732                                                Yes             
+        9   3292654043                                                Yes             
+        
+          Do you consider yourself to be a fan of the Star Wars film franchise?  \textbackslash{}
+        0                                           Response                      
+        1                                                Yes                      
+        2                                                NaN                      
+        3                                                 No                      
+        4                                                Yes                      
+        5                                                Yes                      
+        6                                                Yes                      
+        7                                                Yes                      
+        8                                                Yes                      
+        9                                                Yes                      
+        
+          Which of the following Star Wars films have you seen? Please select all that apply.  \textbackslash{}
+        0           Star Wars: Episode I  The Phantom Menace                                    
+        1           Star Wars: Episode I  The Phantom Menace                                    
+        2                                                NaN                                    
+        3           Star Wars: Episode I  The Phantom Menace                                    
+        4           Star Wars: Episode I  The Phantom Menace                                    
+        5           Star Wars: Episode I  The Phantom Menace                                    
+        6           Star Wars: Episode I  The Phantom Menace                                    
+        7           Star Wars: Episode I  The Phantom Menace                                    
+        8           Star Wars: Episode I  The Phantom Menace                                    
+        9           Star Wars: Episode I  The Phantom Menace                                    
+        
+                                            Unnamed: 4  \textbackslash{}
+        0  Star Wars: Episode II  Attack of the Clones   
+        1  Star Wars: Episode II  Attack of the Clones   
+        2                                          NaN   
+        3  Star Wars: Episode II  Attack of the Clones   
+        4  Star Wars: Episode II  Attack of the Clones   
+        5  Star Wars: Episode II  Attack of the Clones   
+        6  Star Wars: Episode II  Attack of the Clones   
+        7  Star Wars: Episode II  Attack of the Clones   
+        8  Star Wars: Episode II  Attack of the Clones   
+        9  Star Wars: Episode II  Attack of the Clones   
+        
+                                            Unnamed: 5  \textbackslash{}
+        0  Star Wars: Episode III  Revenge of the Sith   
+        1  Star Wars: Episode III  Revenge of the Sith   
+        2                                          NaN   
+        3  Star Wars: Episode III  Revenge of the Sith   
+        4  Star Wars: Episode III  Revenge of the Sith   
+        5  Star Wars: Episode III  Revenge of the Sith   
+        6  Star Wars: Episode III  Revenge of the Sith   
+        7  Star Wars: Episode III  Revenge of the Sith   
+        8  Star Wars: Episode III  Revenge of the Sith   
+        9  Star Wars: Episode III  Revenge of the Sith   
+        
+                                  Unnamed: 6  \textbackslash{}
+        0  Star Wars: Episode IV  A New Hope   
+        1  Star Wars: Episode IV  A New Hope   
+        2                                NaN   
+        3                                NaN   
+        4  Star Wars: Episode IV  A New Hope   
+        5  Star Wars: Episode IV  A New Hope   
+        6  Star Wars: Episode IV  A New Hope   
+        7  Star Wars: Episode IV  A New Hope   
+        8  Star Wars: Episode IV  A New Hope   
+        9  Star Wars: Episode IV  A New Hope   
+        
+                                             Unnamed: 7  \textbackslash{}
+        0  Star Wars: Episode V The Empire Strikes Back   
+        1  Star Wars: Episode V The Empire Strikes Back   
+        2                                           NaN   
+        3                                           NaN   
+        4  Star Wars: Episode V The Empire Strikes Back   
+        5  Star Wars: Episode V The Empire Strikes Back   
+        6  Star Wars: Episode V The Empire Strikes Back   
+        7  Star Wars: Episode V The Empire Strikes Back   
+        8  Star Wars: Episode V The Empire Strikes Back   
+        9  Star Wars: Episode V The Empire Strikes Back   
+        
+                                         Unnamed: 8  \textbackslash{}
+        0  Star Wars: Episode VI Return of the Jedi   
+        1  Star Wars: Episode VI Return of the Jedi   
+        2                                       NaN   
+        3                                       NaN   
+        4  Star Wars: Episode VI Return of the Jedi   
+        5  Star Wars: Episode VI Return of the Jedi   
+        6  Star Wars: Episode VI Return of the Jedi   
+        7  Star Wars: Episode VI Return of the Jedi   
+        8  Star Wars: Episode VI Return of the Jedi   
+        9  Star Wars: Episode VI Return of the Jedi   
+        
+          Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.  \textbackslash{}
+        0           Star Wars: Episode I  The Phantom Menace                                                                                              
+        1                                                  3                                                                                              
+        2                                                NaN                                                                                              
+        3                                                  1                                                                                              
+        4                                                  5                                                                                              
+        5                                                  5                                                                                              
+        6                                                  1                                                                                              
+        7                                                  6                                                                                              
+        8                                                  4                                                                                              
+        9                                                  5                                                                                              
+        
+                    {\ldots}                    Unnamed: 28  \textbackslash{}
+        0           {\ldots}                           Yoda   
+        1           {\ldots}                 Very favorably   
+        2           {\ldots}                            NaN   
+        3           {\ldots}               Unfamiliar (N/A)   
+        4           {\ldots}                 Very favorably   
+        5           {\ldots}             Somewhat favorably   
+        6           {\ldots}                 Very favorably   
+        7           {\ldots}                 Very favorably   
+        8           {\ldots}                 Very favorably   
+        9           {\ldots}             Somewhat favorably   
+        
+                Which character shot first?  \textbackslash{}
+        0                          Response   
+        1  I don't understand this question   
+        2                               NaN   
+        3  I don't understand this question   
+        4  I don't understand this question   
+        5                            Greedo   
+        6                               Han   
+        7                               Han   
+        8                               Han   
+        9                               Han   
+        
+          Are you familiar with the Expanded Universe?  \textbackslash{}
+        0                                     Response   
+        1                                          Yes   
+        2                                          NaN   
+        3                                           No   
+        4                                           No   
+        5                                          Yes   
+        6                                          Yes   
+        7                                          Yes   
+        8                                           No   
+        9                                           No   
+        
+          Do you consider yourself to be a fan of the Expanded Universe?æ  \textbackslash{}
+        0                                           Response                 
+        1                                                 No                 
+        2                                                NaN                 
+        3                                                NaN                 
+        4                                                NaN                 
+        5                                                 No                 
+        6                                                 No                 
+        7                                                 No                 
+        8                                                NaN                 
+        9                                                NaN                 
+        
+          Do you consider yourself to be a fan of the Star Trek franchise?    Gender  \textbackslash{}
+        0                                           Response                Response   
+        1                                                 No                    Male   
+        2                                                Yes                    Male   
+        3                                                 No                    Male   
+        4                                                Yes                    Male   
+        5                                                 No                    Male   
+        6                                                Yes                    Male   
+        7                                                 No                    Male   
+        8                                                Yes                    Male   
+        9                                                 No                    Male   
+        
+                Age     Household Income                         Education  \textbackslash{}
+        0  Response             Response                          Response   
+        1     18-29                  NaN                High school degree   
+        2     18-29         \$0 - \$24,999                   Bachelor degree   
+        3     18-29         \$0 - \$24,999                High school degree   
+        4     18-29  \$100,000 - \$149,999  Some college or Associate degree   
+        5     18-29  \$100,000 - \$149,999  Some college or Associate degree   
+        6     18-29    \$25,000 - \$49,999                   Bachelor degree   
+        7     18-29                  NaN                High school degree   
+        8     18-29                  NaN                High school degree   
+        9     18-29         \$0 - \$24,999  Some college or Associate degree   
+        
+          Location (Census Region)  
+        0                 Response  
+        1           South Atlantic  
+        2       West South Central  
+        3       West North Central  
+        4       West North Central  
+        5       West North Central  
+        6          Middle Atlantic  
+        7       East North Central  
+        8           South Atlantic  
+        9           South Atlantic  
+        
+        [10 rows x 38 columns]
+\end{Verbatim}
+            
+    \section{Removing the RespondentID
+Irregularities}\label{removing-the-respondentid-irregularities}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{star\PYZus{}wars} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{pd}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{RespondentID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+        \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}   RespondentID Have you seen any of the 6 films in the Star Wars franchise?  \textbackslash{}
+        1   3292879998                                                Yes             
+        2   3292879538                                                 No             
+        3   3292765271                                                Yes             
+        4   3292763116                                                Yes             
+        5   3292731220                                                Yes             
+        
+          Do you consider yourself to be a fan of the Star Wars film franchise?  \textbackslash{}
+        1                                                Yes                      
+        2                                                NaN                      
+        3                                                 No                      
+        4                                                Yes                      
+        5                                                Yes                      
+        
+          Which of the following Star Wars films have you seen? Please select all that apply.  \textbackslash{}
+        1           Star Wars: Episode I  The Phantom Menace                                    
+        2                                                NaN                                    
+        3           Star Wars: Episode I  The Phantom Menace                                    
+        4           Star Wars: Episode I  The Phantom Menace                                    
+        5           Star Wars: Episode I  The Phantom Menace                                    
+        
+                                            Unnamed: 4  \textbackslash{}
+        1  Star Wars: Episode II  Attack of the Clones   
+        2                                          NaN   
+        3  Star Wars: Episode II  Attack of the Clones   
+        4  Star Wars: Episode II  Attack of the Clones   
+        5  Star Wars: Episode II  Attack of the Clones   
+        
+                                            Unnamed: 5  \textbackslash{}
+        1  Star Wars: Episode III  Revenge of the Sith   
+        2                                          NaN   
+        3  Star Wars: Episode III  Revenge of the Sith   
+        4  Star Wars: Episode III  Revenge of the Sith   
+        5  Star Wars: Episode III  Revenge of the Sith   
+        
+                                  Unnamed: 6  \textbackslash{}
+        1  Star Wars: Episode IV  A New Hope   
+        2                                NaN   
+        3                                NaN   
+        4  Star Wars: Episode IV  A New Hope   
+        5  Star Wars: Episode IV  A New Hope   
+        
+                                             Unnamed: 7  \textbackslash{}
+        1  Star Wars: Episode V The Empire Strikes Back   
+        2                                           NaN   
+        3                                           NaN   
+        4  Star Wars: Episode V The Empire Strikes Back   
+        5  Star Wars: Episode V The Empire Strikes Back   
+        
+                                         Unnamed: 8  \textbackslash{}
+        1  Star Wars: Episode VI Return of the Jedi   
+        2                                       NaN   
+        3                                       NaN   
+        4  Star Wars: Episode VI Return of the Jedi   
+        5  Star Wars: Episode VI Return of the Jedi   
+        
+          Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.  \textbackslash{}
+        1                                                  3                                                                                              
+        2                                                NaN                                                                                              
+        3                                                  1                                                                                              
+        4                                                  5                                                                                              
+        5                                                  5                                                                                              
+        
+                    {\ldots}                    Unnamed: 28  \textbackslash{}
+        1           {\ldots}                 Very favorably   
+        2           {\ldots}                            NaN   
+        3           {\ldots}               Unfamiliar (N/A)   
+        4           {\ldots}                 Very favorably   
+        5           {\ldots}             Somewhat favorably   
+        
+                Which character shot first?  \textbackslash{}
+        1  I don't understand this question   
+        2                               NaN   
+        3  I don't understand this question   
+        4  I don't understand this question   
+        5                            Greedo   
+        
+          Are you familiar with the Expanded Universe?  \textbackslash{}
+        1                                          Yes   
+        2                                          NaN   
+        3                                           No   
+        4                                           No   
+        5                                          Yes   
+        
+          Do you consider yourself to be a fan of the Expanded Universe?æ  \textbackslash{}
+        1                                                 No                 
+        2                                                NaN                 
+        3                                                NaN                 
+        4                                                NaN                 
+        5                                                 No                 
+        
+          Do you consider yourself to be a fan of the Star Trek franchise? Gender  \textbackslash{}
+        1                                                 No                 Male   
+        2                                                Yes                 Male   
+        3                                                 No                 Male   
+        4                                                Yes                 Male   
+        5                                                 No                 Male   
+        
+             Age     Household Income                         Education  \textbackslash{}
+        1  18-29                  NaN                High school degree   
+        2  18-29         \$0 - \$24,999                   Bachelor degree   
+        3  18-29         \$0 - \$24,999                High school degree   
+        4  18-29  \$100,000 - \$149,999  Some college or Associate degree   
+        5  18-29  \$100,000 - \$149,999  Some college or Associate degree   
+        
+          Location (Census Region)  
+        1           South Atlantic  
+        2       West South Central  
+        3       West North Central  
+        4       West North Central  
+        5       West North Central  
+        
+        [5 rows x 38 columns]
+\end{Verbatim}
+            
+    \section{Converting to Boolean Data
+Type}\label{converting-to-boolean-data-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{bool\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Yes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{False}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{:} \PY{k+kc}{False}\PY{p}{\PYZcb{}}
+        
+        \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Have you seen any of the 6 films in the Star Wars franchise?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{bool\PYZus{}dict}\PY{p}{)}
+        \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Do you consider yourself to be a fan of the Star Wars film franchise?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{bool\PYZus{}dict}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Have you seen any of the 6 films in the Star Wars franchise?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Do you consider yourself to be a fan of the Star Wars film franchise?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Yes' 'No' ' Inc.' nan]
+['Yes' nan 'No']
+
+    \end{Verbatim}
+
+    \section{Change Views Movies Column
+Names}\label{change-views-movies-column-names}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{column\PYZus{}names} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+        \PY{k}{for} \PY{n}{each} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{:}
+            \PY{n}{column\PYZus{}names}\PY{p}{[}\PY{n}{each}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{seen\PYZus{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{each}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{column\PYZus{}names}
+        
+        \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Index(['RespondentID',
+               'Have you seen any of the 6 films in the Star Wars franchise?',
+               'Do you consider yourself to be a fan of the Star Wars film franchise?',
+               'seen\_1', 'seen\_2', 'seen\_3', 'seen\_4', 'seen\_5', 'seen\_6',
+               'Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.',
+               'Unnamed: 10', 'Unnamed: 11', 'Unnamed: 12', 'Unnamed: 13',
+               'Unnamed: 14',
+               'Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her.',
+               'Unnamed: 16', 'Unnamed: 17', 'Unnamed: 18', 'Unnamed: 19',
+               'Unnamed: 20', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23',
+               'Unnamed: 24', 'Unnamed: 25', 'Unnamed: 26', 'Unnamed: 27',
+               'Unnamed: 28', 'Which character shot first?',
+               'Are you familiar with the Expanded Universe?',
+               'Do you consider yourself to be a fan of the Expanded Universe?æ',
+               'Do you consider yourself to be a fan of the Star Trek franchise?',
+               'Gender', 'Age', 'Household Income', 'Education',
+               'Location (Census Region)'],
+              dtype='object')
+\end{Verbatim}
+            
+    \section{Converting Movie Response to Boolean
+Type}\label{converting-movie-response-to-boolean-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{movies} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Star Wars: Episode I  The Phantom Menace}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,} 
+            \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{:} \PY{k+kc}{False}\PY{p}{,} 
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Star Wars: Episode II  Attack of the Clones}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Star Wars: Episode III  Revenge of the Sith}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Star Wars: Episode IV  A New Hope}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Star Wars: Episode V The Empire Strikes Back}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Star Wars: Episode VI Return of the Jedi}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{True}
+        \PY{p}{\PYZcb{}}
+        
+        \PY{k}{for} \PY{n}{cols} \PY{o+ow}{in} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{:}
+            \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{cols}\PY{p}{]} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{movies}\PY{p}{)}
+        
+        \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}   RespondentID Have you seen any of the 6 films in the Star Wars franchise?  \textbackslash{}
+        4   3292763116                                                Yes             
+        5   3292731220                                                Yes             
+        6   3292719380                                                Yes             
+        7   3292684787                                                Yes             
+        8   3292663732                                                Yes             
+        
+          Do you consider yourself to be a fan of the Star Wars film franchise?  \textbackslash{}
+        4                                                Yes                      
+        5                                                Yes                      
+        6                                                Yes                      
+        7                                                Yes                      
+        8                                                Yes                      
+        
+           seen\_1  seen\_2  seen\_3  seen\_4  seen\_5  seen\_6  \textbackslash{}
+        4    True    True    True    True    True    True   
+        5    True    True    True    True    True    True   
+        6    True    True    True    True    True    True   
+        7    True    True    True    True    True    True   
+        8    True    True    True    True    True    True   
+        
+          Please rank the Star Wars films in order of preference with 1 being your favorite film in the franchise and 6 being your least favorite film.  \textbackslash{}
+        4                                                  5                                                                                              
+        5                                                  5                                                                                              
+        6                                                  1                                                                                              
+        7                                                  6                                                                                              
+        8                                                  4                                                                                              
+        
+                    {\ldots}                    Unnamed: 28  \textbackslash{}
+        4           {\ldots}                 Very favorably   
+        5           {\ldots}             Somewhat favorably   
+        6           {\ldots}                 Very favorably   
+        7           {\ldots}                 Very favorably   
+        8           {\ldots}                 Very favorably   
+        
+                Which character shot first?  \textbackslash{}
+        4  I don't understand this question   
+        5                            Greedo   
+        6                               Han   
+        7                               Han   
+        8                               Han   
+        
+          Are you familiar with the Expanded Universe?  \textbackslash{}
+        4                                           No   
+        5                                          Yes   
+        6                                          Yes   
+        7                                          Yes   
+        8                                           No   
+        
+          Do you consider yourself to be a fan of the Expanded Universe?æ  \textbackslash{}
+        4                                                NaN                 
+        5                                                 No                 
+        6                                                 No                 
+        7                                                 No                 
+        8                                                NaN                 
+        
+          Do you consider yourself to be a fan of the Star Trek franchise? Gender  \textbackslash{}
+        4                                                Yes                 Male   
+        5                                                 No                 Male   
+        6                                                Yes                 Male   
+        7                                                 No                 Male   
+        8                                                Yes                 Male   
+        
+             Age     Household Income                         Education  \textbackslash{}
+        4  18-29  \$100,000 - \$149,999  Some college or Associate degree   
+        5  18-29  \$100,000 - \$149,999  Some college or Associate degree   
+        6  18-29    \$25,000 - \$49,999                   Bachelor degree   
+        7  18-29                  NaN                High school degree   
+        8  18-29                  NaN                High school degree   
+        
+          Location (Census Region)  
+        4       West North Central  
+        5       West North Central  
+        6          Middle Atlantic  
+        7       East North Central  
+        8           South Atlantic  
+        
+        [5 rows x 38 columns]
+\end{Verbatim}
+            
+    \section{Change Movie Ranking Columns
+Names}\label{change-movie-ranking-columns-names}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{column\PYZus{}names} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}\PY{p}{:}
+            \PY{n}{column\PYZus{}names}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ranking\PYZus{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{)}
+        \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{column\PYZus{}names}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Index(['ranking\_1', 'ranking\_2', 'ranking\_3', 'ranking\_4', 'ranking\_5',
+       'ranking\_6'],
+      dtype='object')
+
+    \end{Verbatim}
+
+    \section{Change Movie Ranking Columns Data
+Type}\label{change-movie-ranking-columns-data-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ranking\PYZus{}6}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+float64
+
+    \end{Verbatim}
+
+    \section{Plot Average Ranking of
+Movies}\label{plot-average-ranking-of-movies}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{cols} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{]}
+         \PY{n}{bar\PYZus{}heights} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Movie Rankings}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{bar\PYZus{}heights}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Average Movie Rankings
+ ranking\_1    3.732934
+ranking\_2    4.087321
+ranking\_3    4.341317
+ranking\_4    3.272727
+ranking\_5    2.513158
+ranking\_6    3.047847
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bar\PYZus{}positions} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{bar\PYZus{}positions}\PY{p}{,} \PY{n}{bar\PYZus{}heights}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{cols}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movie Names}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movie Average Rankings}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}    
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} Text(0.5,1,'Movie Average Rankings')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Report Number of Movies
+Seen}\label{report-number-of-movies-seen}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{col} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+seen\_1    673
+seen\_2    571
+seen\_3    550
+seen\_4    607
+seen\_5    758
+seen\_6    738
+dtype: int64
+
+    \end{Verbatim}
+
+    \section{Plot Number of Movies Seen}\label{plot-number-of-movies-seen}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{cols} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{9}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{cols}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movies Seen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequency of Movie Viewes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} Text(0.5,1,'Frequency of Movie Viewes')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Split Database into Male \& Female
+Groups}\label{split-database-into-male-female-groups}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{males} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{females} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{males}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{females}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1    Male
+2    Male
+3    Male
+4    Male
+5    Male
+Name: Gender, dtype: object
+112    Female
+113    Female
+115    Female
+117    Female
+118    Female
+Name: Gender, dtype: object
+
+    \end{Verbatim}
+
+    \section{Report \# of Movies Seen by
+Males}\label{report-of-movies-seen-by-males}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{males}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+seen\_1    361
+seen\_2    323
+seen\_3    317
+seen\_4    342
+seen\_5    392
+seen\_6    387
+dtype: int64
+
+    \end{Verbatim}
+
+    \section{Plot \# of Movies Seen by
+Males}\label{plot-of-movies-seen-by-males}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{males}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{cols}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movies Seen by Males}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequency of Movie Viewed by Males}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} Text(0.5,1,'Frequency of Movie Viewed by Males')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Report \# of Movies Seen by
+Females}\label{report-of-movies-seen-by-females}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{females}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+seen\_1    298
+seen\_2    237
+seen\_3    222
+seen\_4    255
+seen\_5    353
+seen\_6    338
+dtype: int64
+
+    \end{Verbatim}
+
+    \section{Plot \# of Movies Seen by
+Females}\label{plot-of-movies-seen-by-females}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{females}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{cols}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movies Seen by Females}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequency of Movie Viewed by Female}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} Text(0.5,1,'Frequency of Movie Viewed by Female')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Plot Average Movie Rankings by
+Males}\label{plot-average-movie-rankings-by-males}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{cols} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n+nb}{print}\PY{p}{(} \PY{n}{males}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ranking\_1    4.037825
+ranking\_2    4.224586
+ranking\_3    4.274882
+ranking\_4    2.997636
+ranking\_5    2.458629
+ranking\_6    3.002364
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{males}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{cols}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movie Names}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movie Average Rankings by Males}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}   
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} Text(0.5,1,'Movie Average Rankings by Males')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Plot Average Movie Rankings by
+Females}\label{plot-average-movie-rankings-by-females}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{females}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ranking\_1    3.429293
+ranking\_2    3.954660
+ranking\_3    4.418136
+ranking\_4    3.544081
+ranking\_5    2.569270
+ranking\_6    3.078086
+dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} \PY{n}{females}\PY{p}{[}\PY{n}{cols}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{cols}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movie Names}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movie Average Rankings by Females}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}   
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} Text(0.5,1,'Movie Average Rankings by Females')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Finding the Characters' Preference
+Pattern}\label{finding-the-characters-preference-pattern}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Please state whether you view the following characters favorably, unfavorably, or are unfamiliar with him/her.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Very favorably' nan 'Somewhat favorably'
+ 'Neither favorably nor unfavorably (neutral)' 'Somewhat unfavorably'
+ 'Unfamiliar (N/A)' 'Very unfavorably']
+
+    \end{Verbatim}
+
+    \subsection{Providing Character Rating Column
+Names}\label{providing-character-rating-column-names}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{cols} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{29}\PY{p}{)}\PY{p}{:}
+             \PY{n}{cols}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{character\PYZus{}}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{14}\PY{p}{)}
+         \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{cols}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{15}\PY{p}{:}\PY{l+m+mi}{29}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{character\PYZus{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Index(['character\_1', 'character\_2', 'character\_3', 'character\_4',
+       'character\_5', 'character\_6', 'character\_7', 'character\_8',
+       'character\_9', 'character\_10', 'character\_11', 'character\_12',
+       'character\_13', 'character\_14'],
+      dtype='object')
+['Very favorably' nan 'Somewhat favorably' 'Very unfavorably'
+ 'Neither favorably nor unfavorably (neutral)' 'Somewhat unfavorably'
+ 'Unfamiliar (N/A)']
+
+    \end{Verbatim}
+
+    \subsection{Filtering the Character Rating Column
+Responses}\label{filtering-the-character-rating-column-responses}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{cols} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{15}\PY{p}{:}\PY{l+m+mi}{29}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{cols}\PY{p}{:}
+             \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{isin}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unfamiliar (N/A)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{n}{col}\PY{p}{]}
+             \PY{n}{star\PYZus{}wars} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Setup the Voting Index based on the Character
+Ranking}\label{setup-the-voting-index-based-on-the-character-ranking}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{} Assigning voting map based on the level of likes/dislikes}
+         \PY{n}{char\PYZus{}map} \PY{o}{=} \PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Very favorably}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Somewhat favorably}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Neither favorably nor unfavorably (neutral)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Somewhat unfavorably}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Very unfavorably}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,}
+         \PY{p}{\PYZcb{}}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{15}\PY{p}{:}\PY{l+m+mi}{29}\PY{p}{]}\PY{p}{:}
+             \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{char\PYZus{}map}\PY{p}{)}
+         \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{:}\PY{l+m+mi}{29}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:}    character\_1  character\_2  character\_3  character\_4  character\_5  \textbackslash{}
+         4            2            2            2            2            2   
+         5            2            1            1           -1            2   
+         6            2            2            2            2            2   
+         7            2            2            1            1            2   
+         8            2            1            2            0            2   
+         
+            character\_6  character\_7  character\_8  character\_9  character\_10  \textbackslash{}
+         4            1            2            1           -1             2   
+         5           -2            1            0            2             1   
+         6            0            2            0            1             1   
+         7            2            2            2            2             1   
+         8           -2           -1            0            1             1   
+         
+            character\_11  character\_12  character\_13  character\_14  
+         4             2             2             2             2  
+         5             1            -2             1             1  
+         6             1             1             0             2  
+         7             2            -1             1             2  
+         8             1            -2            -1             2  
+\end{Verbatim}
+            
+    \subsection{Segregatting Respondents Voting
+Preferences}\label{segregatting-respondents-voting-preferences}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{cols}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}likes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{col}\PY{p}{]}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}dislikes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{col}\PY{p}{]}
+                     
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{38}\PY{p}{:}\PY{l+m+mi}{68}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Index(['character\_1\_likes', 'character\_2\_likes', 'character\_3\_likes',
+       'character\_4\_likes', 'character\_5\_likes', 'character\_6\_likes',
+       'character\_7\_likes', 'character\_8\_likes', 'character\_9\_likes',
+       'character\_10\_likes', 'character\_11\_likes', 'character\_12\_likes',
+       'character\_13\_likes', 'character\_14\_likes', 'character\_1\_dislikes',
+       'character\_2\_dislikes', 'character\_3\_dislikes', 'character\_4\_dislikes',
+       'character\_5\_dislikes', 'character\_6\_dislikes', 'character\_7\_dislikes',
+       'character\_8\_dislikes', 'character\_9\_dislikes', 'character\_10\_dislikes',
+       'character\_11\_dislikes', 'character\_12\_dislikes',
+       'character\_13\_dislikes', 'character\_14\_dislikes'],
+      dtype='object')
+
+    \end{Verbatim}
+
+    \subsection{Respondents "Like" Response for
+Characters}\label{respondents-like-response-for-characters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{38}\PY{p}{:}\PY{l+m+mi}{52}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+character\_1\_likes     872.0
+character\_5\_likes     860.0
+character\_14\_likes    856.0
+character\_2\_likes     831.0
+character\_3\_likes     821.0
+character\_11\_likes    806.0
+character\_10\_likes    730.0
+character\_7\_likes     557.0
+character\_4\_likes     509.0
+character\_13\_likes    383.0
+character\_8\_likes     380.0
+character\_9\_likes     350.0
+character\_6\_likes     311.0
+character\_12\_likes    235.0
+dtype: float64
+
+    \end{Verbatim}
+
+    \subsection{Respondents "Dislike" Response for
+Characters}\label{respondents-dislike-response-for-characters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{52}\PY{p}{:}\PY{l+m+mi}{69}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+character\_12\_dislikes   -392.0
+character\_6\_dislikes    -241.0
+character\_7\_dislikes    -199.0
+character\_9\_dislikes    -122.0
+character\_4\_dislikes    -110.0
+character\_13\_dislikes   -106.0
+character\_8\_dislikes     -56.0
+character\_10\_dislikes    -26.0
+character\_11\_dislikes    -17.0
+character\_5\_dislikes     -16.0
+character\_14\_dislikes    -16.0
+character\_3\_dislikes     -14.0
+character\_2\_dislikes     -12.0
+character\_1\_dislikes      -8.0
+dtype: float64
+
+    \end{Verbatim}
+
+    \subsection{Plot of Respondents' Character Preference
+Pattern}\label{plot-of-respondents-character-preference-pattern}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{col\PYZus{}like} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{38}\PY{p}{:}\PY{l+m+mi}{52}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{col\PYZus{}dislike} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{52}\PY{p}{:}\PY{l+m+mi}{69}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{char\PYZus{}names} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{15}\PY{p}{:}\PY{l+m+mi}{29}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{bar\PYZus{}height\PYZus{}like} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col\PYZus{}like}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bar\PYZus{}height\PYZus{}dislike} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{col\PYZus{}dislike}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+           
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{bar\PYZus{}height\PYZus{}like}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{bar\PYZus{}height\PYZus{}dislike}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{char\PYZus{}names}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Character Names}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Voting Index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Characters Popularity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Male Respondents' "Like" Response for
+Characters}\label{male-respondents-like-response-for-characters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{col\PYZus{}like} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{38}\PY{p}{:}\PY{l+m+mi}{52}\PY{p}{]}\PY{p}{)}
+         \PY{n}{male\PYZus{}char\PYZus{}like} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{col\PYZus{}like}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{male\PYZus{}char\PYZus{}like}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+character\_1\_likes     507.0
+character\_5\_likes     494.0
+character\_2\_likes     480.0
+character\_14\_likes    478.0
+character\_3\_likes     470.0
+character\_11\_likes    434.0
+character\_10\_likes    383.0
+character\_7\_likes     348.0
+character\_4\_likes     270.0
+character\_9\_likes     226.0
+character\_8\_likes     226.0
+character\_13\_likes    217.0
+character\_6\_likes     201.0
+character\_12\_likes    111.0
+dtype: float64
+
+    \end{Verbatim}
+
+    \subsection{Male Respondents' "Dislike" Response for
+Characters}\label{male-respondents-dislike-response-for-characters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{col\PYZus{}dislike} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{52}\PY{p}{:}\PY{l+m+mi}{69}\PY{p}{]}\PY{p}{)}
+         \PY{n}{male\PYZus{}char\PYZus{}dislike} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Male}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{col\PYZus{}dislike}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{male\PYZus{}char\PYZus{}dislike}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+character\_12\_dislikes   -262.0
+character\_6\_dislikes    -129.0
+character\_7\_dislikes     -90.0
+character\_4\_dislikes     -74.0
+character\_13\_dislikes    -69.0
+character\_9\_dislikes     -66.0
+character\_8\_dislikes     -36.0
+character\_10\_dislikes    -22.0
+character\_11\_dislikes    -13.0
+character\_14\_dislikes    -12.0
+character\_5\_dislikes      -9.0
+character\_2\_dislikes      -7.0
+character\_3\_dislikes      -7.0
+character\_1\_dislikes      -6.0
+dtype: float64
+
+    \end{Verbatim}
+
+    \subsection{Plot of Male Respondents' Character Preference
+Pattern}\label{plot-of-male-respondents-character-preference-pattern}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{bar\PYZus{}height\PYZus{}like} \PY{o}{=} \PY{n}{male\PYZus{}char\PYZus{}like}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bar\PYZus{}height\PYZus{}dislike} \PY{o}{=} \PY{n}{male\PYZus{}char\PYZus{}dislike}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+           
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{bar\PYZus{}height\PYZus{}like}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{yellow}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{bar\PYZus{}height\PYZus{}dislike}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{char\PYZus{}names}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Character Names}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Voting Index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Characters Popularity for Males}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Female Respondents' "Like" Response for
+Characters}\label{female-respondents-like-response-for-characters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{col\PYZus{}like} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{38}\PY{p}{:}\PY{l+m+mi}{52}\PY{p}{]}\PY{p}{)}
+         \PY{n}{female\PYZus{}char\PYZus{}like} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{col\PYZus{}like}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{female\PYZus{}char\PYZus{}like}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+character\_14\_likes    364.0
+character\_11\_likes    358.0
+character\_5\_likes     352.0
+character\_1\_likes     351.0
+character\_2\_likes     338.0
+character\_3\_likes     337.0
+character\_10\_likes    333.0
+character\_4\_likes     224.0
+character\_7\_likes     200.0
+character\_13\_likes    156.0
+character\_8\_likes     147.0
+character\_12\_likes    119.0
+character\_9\_likes     115.0
+character\_6\_likes     100.0
+dtype: float64
+
+    \end{Verbatim}
+
+    \subsubsection{Female Respondents' "Dislike" Response for
+Characters}\label{female-respondents-dislike-response-for-characters}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{col\PYZus{}dislike} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{star\PYZus{}wars}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{52}\PY{p}{:}\PY{l+m+mi}{69}\PY{p}{]}\PY{p}{)}
+         \PY{n}{female\PYZus{}char\PYZus{}dislike} \PY{o}{=} \PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{n}{star\PYZus{}wars}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Gender}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Female}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{col\PYZus{}dislike}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{female\PYZus{}char\PYZus{}dislike}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+character\_12\_dislikes   -125.0
+character\_6\_dislikes    -110.0
+character\_7\_dislikes    -105.0
+character\_9\_dislikes     -55.0
+character\_4\_dislikes     -36.0
+character\_13\_dislikes    -36.0
+character\_8\_dislikes     -20.0
+character\_3\_dislikes      -6.0
+character\_5\_dislikes      -6.0
+character\_2\_dislikes      -4.0
+character\_14\_dislikes     -4.0
+character\_10\_dislikes     -3.0
+character\_11\_dislikes     -3.0
+character\_1\_dislikes      -1.0
+dtype: float64
+
+    \end{Verbatim}
+
+    \subsubsection{Plot of Female Respondents' Character Preference
+Pattern}\label{plot-of-female-respondents-character-preference-pattern}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{bar\PYZus{}height\PYZus{}like} \PY{o}{=} \PY{n}{female\PYZus{}char\PYZus{}like}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bar\PYZus{}height\PYZus{}dislike} \PY{o}{=} \PY{n}{female\PYZus{}char\PYZus{}dislike}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+           
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{bar\PYZus{}height\PYZus{}like}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,} \PY{n}{bar\PYZus{}height\PYZus{}dislike}\PY{p}{,} \PY{l+m+mf}{0.40}\PY{p}{,} \PY{n}{align}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grey}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{char\PYZus{}names}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{90}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Character Names}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Voting Index}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Characters Popularity for Females}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Conclusion about favorite Star Wars
+movies}\label{conclusion-about-favorite-star-wars-movies}
+1. Earlier movies appear to be more popular since the respondents tend to see more original movies than the new movies. 
+2. On an average more males watched the scenes 1 thru 3 than the female. However, females liked episodes_3 more than the males.
+3. The respondents overall like character_1 the most followed by the character_5 and character_14.
+4. The respondents overall dislike character_12 the most followed by the character_6 and character_7.
+5. The average weightage of women's characters preference is around 72% that of male's characters preference. 
+6. Considering thin marginal spread between the likes and dislikes for character_6; respondents' preference for this character appear to be controversial.
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
