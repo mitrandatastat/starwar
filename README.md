@@ -19,7 +19,7 @@ The first and foremost question is what the significance of the objectives menti
 
 ### Technical Writeup ###
 
-Please refer to the approprite portion of the portfolio section to read the [detailed project write up](https://portfolio.mshah.info/star-war-survey/). 
+Please refer to the approprite portion of the portfolio section to read the [**Detailed Project Writeup**](https://portfolio.mshah.info/star-war-survey/). 
 
 ### Code Explanation ###
 
